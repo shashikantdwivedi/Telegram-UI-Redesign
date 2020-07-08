@@ -103,6 +103,7 @@ class _MainScreen extends State<MainScreen> {
     Icon(Icons.done_all, color: Color(0xFF2675EC))
   ];
   var activeCategory = 1;
+  bool addOptionActive = false;
 
   PreferredSizeWidget appBar() {
     return PreferredSize(
@@ -115,17 +116,34 @@ class _MainScreen extends State<MainScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Container(
-                padding: EdgeInsets.all(6),
+              addOptionActive
+                  ? Container(
+                      decoration: BoxDecoration(color: Color(0xFF2675EC), borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            child: Image.asset('assets/icons/icon1.png', width: 23, height: 23,)),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            child: Image.asset('assets/icons/icon2.png', width: 23, height: 23,),),
+                           Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            child: Image.asset('assets/icons/icon3.png', width: 23, height: 23,),)
+                        ],
+                      ),
+                    )
+                  : Container(
+                      padding: EdgeInsets.all(6),
 //                decoration: BoxDecoration(border: Border.all()),
-                child: Text(
-                  'Telegram',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: 'Gilroy Bold',
-                      color: Theme.of(context).primaryColor),
-                ),
-              ),
+                      child: Text(
+                        'Telegram',
+                        style: TextStyle(
+                            fontSize: 30.0,
+                            fontFamily: 'Gilroy Bold',
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ),
               Container(
 //                decoration: BoxDecoration(border: Border.all()),
                 child: Row(
@@ -136,7 +154,11 @@ class _MainScreen extends State<MainScreen> {
                         color: Theme.of(context).primaryColor,
                         size: 23,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          addOptionActive = !addOptionActive;
+                        });
+                      },
                     ),
                     IconButton(
                       icon: Icon(
