@@ -9,6 +9,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
   var categories = [
     'All',
     'Important',
@@ -109,7 +110,7 @@ class _MainScreen extends State<MainScreen> {
     return PreferredSize(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 120,
+          height: 70,
           padding: EdgeInsets.all(10.0),
 //          decoration: BoxDecoration(border: Border.all()),
           child: Row(
@@ -118,18 +119,37 @@ class _MainScreen extends State<MainScreen> {
             children: [
               addOptionActive
                   ? Container(
-                      decoration: BoxDecoration(color: Color(0xFF2675EC), borderRadius: BorderRadius.circular(20)),
+                      decoration: BoxDecoration(
+                          color: Color(0xFF2675EC),
+                          borderRadius: BorderRadius.circular(20)),
                       child: Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            child: Image.asset('assets/icons/icon1.png', width: 23, height: 23,)),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              child: Image.asset(
+                                'assets/icons/icon1.png',
+                                width: 23,
+                                height: 23,
+                              )),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            child: Image.asset('assets/icons/icon2.png', width: 23, height: 23,),),
-                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            child: Image.asset('assets/icons/icon3.png', width: 23, height: 23,),)
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            child: Image.asset(
+                              'assets/icons/icon2.png',
+                              width: 23,
+                              height: 23,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            child: Image.asset(
+                              'assets/icons/icon3.png',
+                              width: 23,
+                              height: 23,
+                            ),
+                          )
                         ],
                       ),
                     )
@@ -174,7 +194,10 @@ class _MainScreen extends State<MainScreen> {
                         color: Theme.of(context).primaryColor,
                         size: 23,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        print('button Tapped');
+                        _scaffoldKey.currentState.openEndDrawer();
+                      },
                     )
                   ],
                 ),
@@ -182,7 +205,7 @@ class _MainScreen extends State<MainScreen> {
             ],
           ),
         ),
-        preferredSize: Size.fromHeight(120));
+        preferredSize: Size.fromHeight(70));
   }
 
   Widget categoriesSlider() {
@@ -374,12 +397,164 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
+  Widget drawer() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFF000000).withOpacity(0.03),
+              spreadRadius: 5,
+              blurRadius: 50,
+              offset: Offset(0, 3),
+            )
+          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(35), bottomLeft: Radius.circular(35))),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    icon:
+                        Icon(Icons.arrow_forward_ios, color: Color(0xFF2675EC)),
+                    onPressed: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    }),
+                IconButton(
+                    icon: Icon(Ionicons.ios_settings, color: Color(0xFF2675EC)),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/settings');
+                    })
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 15),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Container(
+                    margin: EdgeInsets.all(5),
+                    width: 72,
+                    height: 72,
+                    child: Image.asset('assets/images/users/user.png')),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  child: Text('Gloria\nMckinney',
+                      style: TextStyle(
+                          fontFamily: 'Gilroy Bold',
+                          fontSize: 19,
+                          color: Color(0xFF2675EC))),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+              children: [
+                Container(
+                  width: 23,
+                  height: 23,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Image.asset('assets/icons/icon4.png')),
+                Text('Contacts',
+                    style: TextStyle(
+                        fontFamily: 'Gilroy SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF2675EC)))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+              children: [
+                Container(
+                  width: 26,
+                  height: 26,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Image.asset('assets/icons/icon5.png')),
+                Text('Calls',
+                    style: TextStyle(
+                        fontFamily: 'Gilroy SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF2675EC)))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+              children: [
+                Container(
+                 width: 23,
+                  height: 23,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Image.asset('assets/icons/icon6.png')),
+                Text('Save messages',
+                    style: TextStyle(
+                        fontFamily: 'Gilroy SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF2675EC)))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+              children: [
+                Container(
+                 width: 23,
+                  height: 23,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Image.asset('assets/icons/icon7.png')),
+                Text('Invite Friends',
+                    style: TextStyle(
+                        fontFamily: 'Gilroy SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF2675EC)))
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Row(
+              children: [
+                Container(
+                 width: 23,
+                  height: 23,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Image.asset('assets/icons/icon8.png')),
+                Text('Telegram FAQ',
+                    style: TextStyle(
+                        fontFamily: 'Gilroy SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF2675EC)))
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFFFFFFF),
       appBar: appBar(),
+      drawerScrimColor: Colors.transparent,
+      endDrawer: drawer(),
       body: Column(
         children: [categoriesSlider(), Expanded(child: chats())],
       ),

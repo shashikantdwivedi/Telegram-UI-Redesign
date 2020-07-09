@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/main_screen.dart';
+import 'screens/user_settings.dart';
 
 void main() {
   runApp(App());
@@ -17,7 +18,8 @@ class App extends StatelessWidget {
       ),
       initialRoute: '/mainScreen',
       routes: {
-        '/mainScreen': (context) => MainScreen()
+        '/mainScreen': (context) => MainScreen(),
+        '/settings': (context) => UserSettings()
       },
     );
   }
